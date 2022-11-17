@@ -1,10 +1,8 @@
-<section class='container'>  
-  <h2>All Foods</h2>
-  <div class="btn__holder">
-    <button class='btn'>
-      <%= link_to 'Add new food', new_food_path %>
-    </button> 
-  </div>
+<section class='container grid gap-1'>  
+  <h2 class = 'jc'>Food-List</h2>
+  <button class='btn jr'>
+    <%= link_to 'Add new food', new_food_path %>
+  </button> 
   <table class="table">
     <thead>
         <tr>
@@ -21,7 +19,7 @@
         <td> <%= food.measurement_unit %> </td>
         <td>$<%= food.price %> </td>
         <td>           
-            <%= button_to "Delete", food_path(food.id ), :method => :delete, class: "btn" %> 
+            <%= button_to "Delete", food_path(food.id), :method => :delete, class: "btn btn--plain" %> 
 
         </td>
         </tr>
