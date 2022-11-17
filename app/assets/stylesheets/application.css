@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+
+table {
+  width: 95%;
+}
+
+tbody > tr:nth-child(odd) {
+  background-color: cadetblue;
+}
+
+thead {
+  background-color: gray;
+  color: white;
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.grid {
+  display: grid;
+}
+
+.gap-1 {
+  gap: 1em;
+}
+
+.jc {
+  justify-self: center;
+}
+
+.jr {
+  justify-self: right;
+}
+
+.btn--plain {
+  border: none;
+  background: none;
+  color: red;
+  text-decoration: underline;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
