@@ -1,5 +1,21 @@
 # frozen_string_literal: true
 
+class TurboFailureApp < Devise::FailureApp
+  def respond
+    if request_format == :turbo_stream
+      redirect
+    else
+      super
+    end
+  end
+
+  def skip_format?
+    %w(html turbo_stream */*).include? request_format.to_s
+  end
+end
+
+
+
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -14,11 +30,18 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '8fdd9181acea022dce0d595e60eb16a8652d8df3462c703eb0b30c8dc70f73ee4dc6893512d3fd16aa4342534cd41f969059121d50838447af18c93d048661c6'
+  # config.secret_key = '179e78c2d53077ea80aa0e18f01ae5ebb534ae8d58e8c6268d871ff4aa23fc995f9d1cfdfaa4f2cfe6b7c6a3ce1cfb5e9dbf4423fc466ca036d0beebced112ce'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
+
+  config.parent_controller = 'TurboController'
+
+  # ==> Warden configuration
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -126,7 +149,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '37153bc0db0e73b27eb286261e8a9f3bff15cfa31b1a7fdc5e1985b41319f0b55501a5867688e570c2954ab1e646779be638c85cdf83210a4c6f653971c4ef45'
+  # config.pepper = '366c5ee7344fd67bea34e400454a5e655b8c33da5e8ee34dafaf5bb3e8b23b312837f90186b2a292524a16288c462c5c1435915215383b282a48050936888b7f'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
