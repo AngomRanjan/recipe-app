@@ -1,29 +1,22 @@
-<section class='container grid gap-1'>  
-  <h2 class = 'jc'>Food-List</h2>
-  <button class='btn jr'>
-    <%= link_to 'Add new food', new_food_path %>
-  </button> 
-  <table class="table">
-    <thead>
-        <tr>
-        <th scope="col">Food</th>
-        <th scope="col">Measurement Unit</th>
-        <th scope="col">Unit Price</th>
-        <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-      <% @foods.each do |food| %>
-        <tr>
-        <th scope="row"> <%= food.name %> </th>
-        <td> <%= food.measurement_unit %> </td>
-        <td>$<%= food.price %> </td>
-        <td>           
-            <%= button_to "Delete", food_path(food.id), :method => :delete, class: "btn btn--plain" %> 
+<section>
+  <%= link_to new_food_path do %>
+    <button>Add Food</button>
+  <% end %>
 
-        </td>
-        </tr>
-      <% end %>
-    </tbody>
+  <table>
+    <tr>
+      <th>Food</th>
+      <th>Measurement Unit</th>
+      <th>Unit Price</th>
+      <th>Actions</th>
+    </tr>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= food.name %></td>
+        <td><%= food.quantity %><%= food.measurement_unit %></td>
+        <td>$<%= food.price %></td>
+        <td><%= link_to 'Delete', foods_path %></td>
+      <tr>
+    <% end %>
   </table>
 </section>
